@@ -15,13 +15,15 @@ const passwordError = document.querySelector('.error-password');
 const passwordConfirmation = document.querySelector('#password-confirmation');
 const passwordConfirmError = document.querySelector('.error-passsword-confirm');
 
-email.addEventListener('input', (e) => {
-  if (email.validity.valid) {
-    emailError.textContent = '';
-  } else {
-    showEmailError();
-  }
+email.addEventListener('input', () => {
+  email.validity.valid ? (emailError.textContent = '') : showEmailError();
 });
+
+country.addEventListener('input', () => {
+  country.validity.valid ? (countryError.textContent = '') : showCountryError();
+});
+
+
 
 function showEmailError() {
   if (email.validity.valueMissing) {
@@ -33,9 +35,20 @@ function showEmailError() {
   }
 }
 
-form.addEventListener('submit', (e) => {
-  if (!email.validity.valid) {
-    showEmailError();
-    e.preventDefault();
+function showCountryError() {
+  if (country.validity.valueMissing) {
+    countryError.textContent = 'You need to enter a country name.';
+  } else if (country.validity.patternMismatch) {
+    countryError.textContent =
+      "Country's name should begin with a capital letter and can consist of letters only";
+  } else if (country.validity.tooShort) {
+    countryError.textContent = `Country's name should be at least ${country.minLength} characters; you entered ${country.value.length}.`;
   }
-});
+}
+
+// form.addEventListener('submit', (e) => {
+//   if (!email.validity.valid) {
+//     showEmailError();
+//     e.preventDefault();
+//   }
+// });
