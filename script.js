@@ -12,8 +12,8 @@ const zipError = document.querySelector('.error-zip');
 const password = document.querySelector('#password');
 const passwordError = document.querySelector('.error-password');
 
-const passwordConfirmation = document.querySelector('#password-confirmation');
-const passwordConfirmError = document.querySelector('.error-passsword-confirm');
+const passwordConfirmation = document.getElementById('password-confirmation');
+const confirmError = document.querySelector('.error-password-confirm');
 
 email.addEventListener('input', () => {
   email.validity.valid ? (emailError.textContent = '') : showEmailError();
@@ -23,7 +23,18 @@ country.addEventListener('input', () => {
   country.validity.valid ? (countryError.textContent = '') : showCountryError();
 });
 
+zipCode.addEventListener('input', () => {
+  zipCode.validity.valid ? (zipError.textContent = '') : showZipError();
+});
 
+password.addEventListener('input', () => {
+  password.validity.valid ? (passwordError.textContent = '') : showPasswordError();
+});
+
+passwordConfirmation.addEventListener('input', () => {
+  confirmError.textContent = '';
+  checkPasswordVailidity();
+});
 
 function showEmailError() {
   if (email.validity.valueMissing) {
@@ -43,6 +54,33 @@ function showCountryError() {
       "Country's name should begin with a capital letter and can consist of letters only";
   } else if (country.validity.tooShort) {
     countryError.textContent = `Country's name should be at least ${country.minLength} characters; you entered ${country.value.length}.`;
+  }
+}
+
+function showZipError() {
+  if (zipCode.validity.valueMissing) {
+    zipError.textContent = 'You need to enter a zip code.';
+  } else if (zipCode.validity.patternMismatch) {
+    zipError.textContent = 'Zip code should consist of numbers only';
+  } else if (zipCode.validity.tooShort) {
+    zipError.textContent = `Zip code should be at least ${zipCode.minLength} characters; you entered ${zipCode.value.length}.`;
+  }
+}
+
+function showPasswordError() {
+  if (password.validity.valueMissing) {
+    passwordError.textContent = 'You need to enter a password.';
+  } else if (password.validity.patternMismatch) {
+    passwordError.textContent =
+      'Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.';
+  }
+}
+
+function checkPasswordVailidity() {
+  if (passwordConfirmation.validity.valueMissing) {
+    confirmError.innerHTML = 'You need to confirm your password.';
+  } else if (passwordConfirmation.value != password.value) {
+    confirmError.textContent = 'Passwords do not match.';
   }
 }
 
