@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <form novalidate class="form-container">
+    <div class="form-group">
+      <input type="email" id="email" placeholder="Email" required minlength="8">
+      <span class="error-email"></span>
+    </div>
+    <div class="form-group">
+      <input type="text" id="country" placeholder="Country" required minlength="2">
+      <span class="error-country"></span>
+    </div>
+    <div class="form-group">
+      <input type="number" id="zip-code" placeholder="Zip Code" required minlength="4" maxlength="10">
+      <span class="error-zip"></span>
+    </div>
+    <div class="form-group">
+      <input type="password" id="password" placeholder="Password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+      <span class="error-password"></span>
+    </div>
+    <div class="form-group">
+      <input type="password" id="password-confirmation" placeholder="Confirm Password" required>
+      <span class="error-password-confirm"></span>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
