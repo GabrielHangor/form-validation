@@ -1,4 +1,5 @@
 const form = document.querySelector('.form-container');
+const formValid = document.querySelector('.form-submitted');
 
 const email = document.querySelector('#email');
 const emailError = document.querySelector('.error-email');
@@ -84,9 +85,24 @@ function checkPasswordVailidity() {
   }
 }
 
-// form.addEventListener('submit', (e) => {
-//   if (!email.validity.valid) {
-//     showEmailError();
-//     e.preventDefault();
-//   }
-// });
+function checkFormValidity() {
+  showEmailError();
+  showCountryError();
+  showZipError();
+  showPasswordError();
+  checkPasswordVailidity();
+}
+
+form.addEventListener('submit', (e) => {
+  checkFormValidity();
+  e.preventDefault();
+
+  const spanValues = [...document.querySelectorAll('span')]
+    .map((value) => value.innerText)
+    .filter((value) => value);
+
+  if (spanValues.length === 0) {
+    formValid.textContent = 'Form Submitted!';
+    setTimeout(() => (formValid.textContent = ''), 2000);
+  }
+});
